@@ -14,7 +14,7 @@ services:
           property: connectionString
       - key: JWT_SECRET
         generateValue: true # This will generate a secure, random secret
-    dockerfile: Dockerfile
+    dockerfile: ./backend/Dockerfile
     dockerContext: ./backend
 
   - type: web
@@ -23,7 +23,7 @@ services:
     repo: https://github.com/vishwas2628/Online-test-webapp
     region: oregon # e.g., oregon, frankfurt, ohio
     plan: free
-    dockerfile: Dockerfile.prod
+    dockerfile: ./client/Dockerfile.prod
     dockerContext: ./client
     routes:
       - type: rewrite

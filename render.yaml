@@ -6,16 +6,15 @@ services:
     region: oregon # e.g., oregon, frankfurt, ohio
     plan: free
     healthCheckPath: /api/health
-    envVars:
-      - key: MONGO_URI
-        fromService:
-          type: pserv
-          name: mongo
-          property: connectionString
-      - key: JWT_SECRET
-        generateValue: true # This will generate a secure, random secret
     dockerfilePath: ./backend/Dockerfile
     dockerContext: ./backend
+    envVars:
+      - key: PORT
+        value: 8080 # Matches nginx.conf upstream port
+      - key: MONGO_URI
+        sync: false # User must provide MongoDB Atlas URI in dashboard
+      - key: JWT_SECRET
+        generateValue: true
 
   - type: web
     name: frontend
@@ -25,16 +24,7 @@ services:
     plan: free
     dockerfilePath: ./client/Dockerfile.prod
     dockerContext: ./client
-    routes:
-      - type: rewrite
-        source: /api/*
-        destination: /api/*
-      - type: rewrite
-        source: /*
-        destination: /index.html
+    # Routes removed: handled by Nginx in Docker container
 
-  - type: pserv
-    name: mongo
-    env: mongodb
-    region: oregon # e.g., oregon, frankfurt, ohio
-    plan: free
+# MongoDB service removed: Render does not define Managed MongoDB in Blueprint via 'pserv'.
+# Please use an external provider like MongoDB Atlas and provide the MONGO_URI.

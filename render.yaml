@@ -24,6 +24,12 @@ services:
     plan: free
     dockerfilePath: ./client/Dockerfile.prod
     dockerContext: ./client
+    envVars:
+      - key: BACKEND_URL
+        fromService:
+          type: web
+          name: backend
+          property: url
     # Routes removed: handled by Nginx in Docker container
 
 # MongoDB service removed: Render does not define Managed MongoDB in Blueprint via 'pserv'.

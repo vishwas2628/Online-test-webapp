@@ -28,6 +28,10 @@ app.use('/api/teacher', require('./routes/teacher.routes'));
 app.use('/api/student', require('./routes/student.routes'));
 app.use('/api/result', require('./routes/result.routes'));
 
+app.get('/api/health', (req, res) => {
+    res.status(200).send('OK');
+});
+
 app.get('/', (req, res) => {
     res.send('API is running...');
 });

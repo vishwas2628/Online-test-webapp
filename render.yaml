@@ -1,0 +1,40 @@
+services:
+  - type: web
+    name: backend
+    env: docker
+    repo: https://github.com/your-username/your-repo-name # Replace with your GitHub repo URL
+    region: oregon # e.g., oregon, frankfurt, ohio
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: MONGO_URI
+        fromService:
+          type: pserv
+          name: mongo
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true # This will generate a secure, random secret
+    dockerfile: backend/Dockerfile
+    dockerContext: ./backend
+
+  - type: web
+    name: frontend
+    env: docker
+    repo: https://github.com/your-username/your-repo-name # Replace with your GitHub repo URL
+    region: oregon # e.g., oregon, frankfurt, ohio
+    plan: free
+    dockerfile: client/Dockerfile.prod
+    dockerContext: ./client
+    routes:
+      - type: rewrite
+        source: /api/*
+        destination: /api/*
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
+  - type: pserv
+    name: mongo
+    env: mongodb
+    region: oregon # e.g., oregon, frankfurt, ohio
+    plan: free

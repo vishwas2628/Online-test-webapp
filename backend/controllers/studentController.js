@@ -47,13 +47,26 @@ const submitTestAttempt = async (req, res) => {
         let totalPoints = 0;
 
         test.questions.forEach(question => {
-            totalPoints += question.points || 1;
+            const points = question.points || 1;
+            totalPoints += points;
+
             const submittedAnswer = answers.find(a => a.questionId === question._id.toString());
 
-            if (submittedAnswer && submittedAnswer.answer === question.correctAnswer) {
-                score += question.points || 1;
+            if (submittedAnswer && submittedAnswer.answer) {
+                if (submittedAnswer.answer === question.correctAnswer) {
+                    score += points;
+                } else {
+                    // Negative marking: Deduct 25% of the question's points for wrong answers
+                    score -= (points * 0.25);
+                }
             }
         });
+
+        // Optional: Ensure score isn't negative overall? 
+        // Real exams allow negative total, but typically we display 0 if < 0 for basic apps.
+        // Let's keep it real (allow negative) or floor at 0? 
+        // I'll floor at 0 to be safe for UI display unless requested otherwise.
+        if (score < 0) score = 0;
 
         const attempt = await TestAttempt.create({
             studentId,
@@ -73,9 +86,8 @@ const submitTestAttempt = async (req, res) => {
 // @route   GET /api/student/results/:testId
 const getStudentTestResult = async (req, res) => {
     try {
-        // This typically assumes one attempt per test per student, or gets latest?
-        // Or gets a specific attempt if ID passed? PDF says ":testId".
         const attempt = await TestAttempt.findOne({ testId: req.params.testId, studentId: req.user._id })
+            .populate('testId') // Populate full test details including correct answers for analytics
             .sort('-createdAt');
 
         if (!attempt) return res.status(404).json({ message: 'Result not found' });

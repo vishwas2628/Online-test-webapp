@@ -10,7 +10,7 @@ services:
     dockerContext: ./backend
     envVars:
       - key: PORT
-        value: 8080 # Matches nginx.conf upstream port
+        value: "8080" # Matches nginx.conf upstream port
       - key: MONGO_URI
         sync: false # User must provide MongoDB Atlas URI in dashboard
       - key: JWT_SECRET
@@ -24,6 +24,9 @@ services:
     plan: free
     dockerfilePath: ./client/Dockerfile.prod
     dockerContext: ./client
+    envVars:
+      - key: PORT
+        value: "80" # Nginx inside container listens on 80
     # Routes removed: handled by Nginx in Docker container
 
 # MongoDB service removed: Render does not define Managed MongoDB in Blueprint via 'pserv'.

@@ -2,60 +2,65 @@
 
 This project is a full-stack web application for creating and taking online tests.
 
-## Deployment
+## Development Setup (Manual)
 
-This application is containerized using Docker and orchestrated with Docker Compose.
+To run the application locally for development, you will run the frontend and backend manually in separate terminals.
 
 ### Prerequisites
+*   Node.js (v18 or higher)
+*   MongoDB (or use the Atlas connection string in `.env`)
 
-*   [Docker](https://docs.docker.com/get-docker/)
-*   [Docker Compose](https://docs.docker.com/compose/install/)
-
-### Production Deployment
-
-To deploy the application in a production environment, follow these steps:
-
-1.  **Clone the repository:**
-
+### 1. Backend Setup
+1.  Navigate to the backend directory:
     ```bash
-    git clone <repository-url>
-    cd online-test-tackingwebApplication
+    cd backend
     ```
-
-2.  **Environment Variables:**
-
-    Before building the containers, you need to configure the environment variables. The `docker-compose.yml` file has some default values, but you should update them for a production environment, especially the `JWT_SECRET`.
-
-3.  **Build and run the application:**
-
+2.  Install dependencies:
     ```bash
-    docker-compose -f docker-compose.yml build
-    docker-compose -f docker-compose.yml up -d
+    npm install
     ```
-
-    This will build the Docker images for the frontend and backend services and run them in detached mode.
-
-4.  **Access the application:**
-
-    Once the containers are up and running, you can access the application by navigating to `http://localhost` in your web browser.
-
-    The backend API will be accessible at `http://localhost/api`.
-
-### Development Environment
-
-If you want to run the application in a development environment with hot-reloading, you can use the original `docker-compose.yml` file. You will need to revert the changes made to the `docker-compose.yml`, `backend/Dockerfile`, and you will need to create a `client/Dockerfile` for development.
-
-To run in development mode:
-
-1.  Make sure you have the development Dockerfiles and `docker-compose.yml`.
-2.  Run the following command:
-
+3.  Ensure your `.env` file is configured (PORT, MONGO_URI, JWT_SECRET).
+4.  Start the server:
     ```bash
-    docker-compose up --build
+    npm run dev
     ```
+    The backend will run on `http://localhost:5000`.
 
-This will start the application in development mode with the following ports:
+### 2. Frontend Setup
+1.  Open a new terminal and navigate to the client directory:
+    ```bash
+    cd client
+    ```
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+3.  Ensure your `client/.env` has the correct API URL:
+    ```properties
+    VITE_API_URL=http://localhost:5000/api
+    ```
+4.  Start the development server:
+    ```bash
+    npm run dev
+    ```
+    The frontend will run on `http://localhost:5173`.
 
-*   **Frontend:** `http://localhost:5173`
-*   **Backend:** `http://localhost:5000`
-*   **MongoDB:** `mongodb://localhost:27017`
+---
+
+## Production Deployment (Docker)
+
+The project includes a `docker-compose.yml` configured strictly for production. It uses Nginx for the frontend and connects to MongoDB Atlas.
+
+### Run with Docker
+1.  Build and start the containers:
+    ```bash
+    docker-compose up --build -d
+    ```
+2.  Access the application:
+    *   **Frontend:** `http://localhost` (Port 80)
+    *   **Backend:** `http://localhost:8080`
+
+### Stop the Application
+```bash
+docker-compose down
+```

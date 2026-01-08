@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
 import { FiCheckCircle, FiShield, FiTrendingUp, FiClock, FiUsers, FiSmartphone } from 'react-icons/fi';
+import { useAuth } from '../context/AuthContext';
 
 const Landing = () => {
+    const { user } = useAuth();
+
     return (
         <div className="relative">
             {/* Hero Section */}
@@ -21,24 +24,35 @@ const Landing = () => {
                             ExamSphere is a modern, web-based online test-taking platform that simplifies examination management for teachers and delivers a seamless test experience for students—anytime, anywhere.
                         </p>
                         <div className="mt-10 flex items-center justify-center gap-x-6 animate-fade-in-up animation-delay-4000 flex-wrap gap-y-4">
-                            <Link
-                                to="/register"
-                                className="rounded-full bg-secondary-500 px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-secondary-500/30 hover:bg-secondary-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary-400 transition-transform transform hover:-translate-y-1"
-                            >
-                                Get Started
-                            </Link>
-                            <Link
-                                to="/login"
-                                className="rounded-full bg-white/10 px-8 py-3.5 text-sm font-semibold text-white hover:bg-white/20 border border-white/20 backdrop-blur-sm transition-transform transform hover:-translate-y-1"
-                            >
-                                Login as Student
-                            </Link>
-                            <Link
-                                to="/login" // Assuming same login page for now, role selection handles it
-                                className="text-sm font-semibold leading-6 text-white hover:text-secondary-300 transition-colors"
-                            >
-                                Login as Teacher <span aria-hidden="true">→</span>
-                            </Link>
+                            {user ? (
+                                <Link
+                                    to={user.role === 'teacher' ? '/teacher' : '/student'}
+                                    className="rounded-full bg-primary-600 px-8 py-3.5 text-lg font-semibold text-white shadow-lg shadow-primary-500/30 hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 transition-transform transform hover:-translate-y-1"
+                                >
+                                    Go to Dashboard
+                                </Link>
+                            ) : (
+                                <>
+                                    <Link
+                                        to="/register"
+                                        className="rounded-full bg-secondary-500 px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-secondary-500/30 hover:bg-secondary-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary-400 transition-transform transform hover:-translate-y-1"
+                                    >
+                                        Get Started
+                                    </Link>
+                                    <Link
+                                        to="/login"
+                                        className="rounded-full bg-white/10 px-8 py-3.5 text-sm font-semibold text-white hover:bg-white/20 border border-white/20 backdrop-blur-sm transition-transform transform hover:-translate-y-1"
+                                    >
+                                        Login as Student
+                                    </Link>
+                                    <Link
+                                        to="/login" // Assuming same login page for now, role selection handles it
+                                        className="text-sm font-semibold leading-6 text-white hover:text-secondary-300 transition-colors"
+                                    >
+                                        Login as Teacher <span aria-hidden="true">→</span>
+                                    </Link>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>

@@ -20,7 +20,7 @@ app.use(cookieParser());
 // Database Connection
 mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/online-test-app')
     .then(() => console.log('MongoDB connected'))
-    .catch(err => console.log(err));
+    .catch(err => console.log("mongo is connection err", err));
 
 // Routes
 app.use('/api/user', require('./routes/user.routes'));

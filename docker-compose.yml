@@ -1,27 +1,15 @@
 version: '3.8'
 
 services:
-  mongo:
-    image: mongo:latest
-    container_name: online-test-mongo
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo-data:/data/db
-    networks:
-      - mern-network
-
   backend:
     build: ./backend
     container_name: online-test-backend
     ports:
       - "8080:5000"
     environment:
-      - PORT=5000
-      - MONGO_URI=mongodb://mongo:27017/online-test-app
-      - JWT_SECRET=secretkey123
-    depends_on:
-      - mongo
+      - PORT=${PORT}
+      - MONGO_URI=${MONGO_URI}
+      - JWT_SECRET=${JWT_SECRET}
     networks:
       - mern-network
 
@@ -40,6 +28,3 @@ services:
 networks:
   mern-network:
     driver: bridge
-
-volumes:
-  mongo-data:

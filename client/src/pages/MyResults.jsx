@@ -140,13 +140,21 @@ const MyResults = () => {
                                                     </span>
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-right">
-                                                    <Link
-                                                        to={`/student/analytics/${result.testId?._id}`}
-                                                        className="inline-flex items-center px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-primary-600 transition shadow-sm"
-                                                    >
-                                                        <FiBarChart2 className="mr-2" />
-                                                        View Analysis
-                                                    </Link>
+                                                    {/* Access Control: Only show if test ended or manually completed */}
+                                                    {(new Date() > new Date(result.testId?.endTime) || result.testId?.status === 'completed') ? (
+                                                        <Link
+                                                            to={`/student/analytics/${result.testId?._id}`}
+                                                            className="inline-flex items-center px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-primary-600 transition shadow-sm"
+                                                        >
+                                                            <FiBarChart2 className="mr-2" />
+                                                            View Analysis
+                                                        </Link>
+                                                    ) : (
+                                                        <span className="inline-flex items-center px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm font-medium text-gray-400 cursor-not-allowed">
+                                                            <FiClock className="mr-2" />
+                                                            Available Later
+                                                        </span>
+                                                    )}
                                                 </td>
                                             </tr>
                                         );

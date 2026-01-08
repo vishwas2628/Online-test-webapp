@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from '../config/axios';
 import { useParams, Link } from 'react-router-dom';
 import { FiArrowLeft, FiUsers, FiBarChart2, FiDownload, FiSearch } from 'react-icons/fi';
+import { toast } from 'react-hot-toast';
 
 const TeacherTestResults = () => {
     const { testId } = useParams();
@@ -38,6 +39,39 @@ const TeacherTestResults = () => {
     const passCount = results.filter(r => (r.score / r.totalPoints) >= 0.4).length;
     const passRate = totalAttempts > 0 ? Math.round((passCount / totalAttempts) * 100) : 0;
 
+    const handleExport = async () => {
+        try {
+            const toastId = toast.loading('Generating PDF report...');
+            const response = await axios.get(`/result/export/${testId}`, {
+                responseType: 'blob', // Important
+            });
+
+            // Create blob link to download
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+
+            // Extract filename from header or assume default
+            const contentDisposition = response.headers['content-disposition'];
+            let fileName = 'report.pdf';
+            if (contentDisposition) {
+                const fileNameMatch = contentDisposition.match(/filename="(.+)"/);
+                if (fileNameMatch.length === 2)
+                    fileName = fileNameMatch[1];
+            }
+
+            link.setAttribute('download', fileName);
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+
+            toast.success('Report downloaded successfully!', { id: toastId });
+        } catch (error) {
+            console.error('Download failed', error);
+            toast.error('Failed to download report');
+        }
+    };
+
     if (loading) {
         return (
             <div className="flex items-center justify-center min-h-[calc(100vh-4rem)] bg-gray-50">
@@ -60,10 +94,16 @@ const TeacherTestResults = () => {
                             <h1 className="text-3xl font-heading font-bold text-gray-900">{test?.title || 'Test Results'}</h1>
                             <p className="text-gray-500 mt-1">Detailed performance analytics and student submissions.</p>
                         </div>
-                        <button className="flex items-center px-4 py-2 bg-white border border-gray-200 rounded-lg text-gray-600 hover:bg-gray-50 transition shadow-sm">
-                            <FiDownload className="mr-2" />
-                            Export Data
-                        </button>
+                        {/* Only show Export if test is finished or explicitly completed */}
+                        {(test && (new Date() > new Date(test.endTime) || test.status === 'completed')) && (
+                            <button
+                                onClick={handleExport}
+                                className="flex items-center px-4 py-2 bg-white border border-gray-200 rounded-lg text-gray-600 hover:bg-gray-50 transition shadow-sm"
+                            >
+                                <FiDownload className="mr-2" />
+                                Export Data
+                            </button>
+                        )}
                     </div>
                 </div>
 

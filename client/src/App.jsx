@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import PublicOnlyRoute from './components/PublicOnlyRoute';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Login from './pages/Login';
@@ -26,9 +27,6 @@ function App() {
   );
 }
 
-
-
-
 const MainLayout = () => {
   const location = useLocation();
   // Check if we are on the landing page for conditional styling
@@ -42,8 +40,12 @@ const MainLayout = () => {
           {/* Public Routes */}
           <Route path="/" element={<Landing />} />
           <Route path="/about" element={<About />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+
+          {/* Routes accessible only when NOT logged in */}
+          <Route element={<PublicOnlyRoute />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Route>
 
           {/* Teacher Routes */}
           <Route element={<ProtectedRoute allowedRoles={['teacher']} />}>
@@ -66,7 +68,5 @@ const MainLayout = () => {
     </>
   );
 };
-
-
 
 export default App;

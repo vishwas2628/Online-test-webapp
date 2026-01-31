@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from '../config/axios';
 import { toast } from 'react-hot-toast';
@@ -45,13 +45,13 @@ const TakeTest = () => {
             }, 1000);
         }
         return () => clearInterval(timerRef.current);
-    }, [timeLeft, submitting]);
+    }, [timeLeft, submitting, submitTest]);
 
     const handleAnswerChange = (questionId, option) => {
         setAnswers({ ...answers, [questionId]: option });
     };
 
-    const submitTest = async (autoSubmit = false) => {
+    const submitTest = useCallback(async (autoSubmit = false) => {
         if (!autoSubmit && !window.confirm('Are you sure you want to finish and submit your exam?')) {
             return;
         }
@@ -77,7 +77,7 @@ const TakeTest = () => {
             toast.error('Submission failed. Please try again.', { id: toastId });
             setSubmitting(false);
         }
-    };
+    }, [answers, testId, navigate]);
 
     const formatTime = (seconds) => {
         const h = Math.floor(seconds / 3600);
@@ -144,8 +144,8 @@ const TakeTest = () => {
                         <div
                             key={q._id}
                             className={`bg-white rounded-2xl p-6 md:p-8 shadow-sm border transition-all duration-300 ${answers[q._id]
-                                    ? 'border-primary-200 shadow-md ring-1 ring-primary-50'
-                                    : 'border-gray-100'
+                                ? 'border-primary-200 shadow-md ring-1 ring-primary-50'
+                                : 'border-gray-100'
                                 }`}
                         >
                             <div className="flex items-start mb-6">
@@ -167,8 +167,8 @@ const TakeTest = () => {
                                     <label
                                         key={i}
                                         className={`group relative flex items-center p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 ${answers[q._id] === opt
-                                                ? 'border-primary-500 bg-primary-50/30'
-                                                : 'border-gray-100 hover:border-primary-200 hover:bg-gray-50'
+                                            ? 'border-primary-500 bg-primary-50/30'
+                                            : 'border-gray-100 hover:border-primary-200 hover:bg-gray-50'
                                             }`}
                                     >
                                         <input

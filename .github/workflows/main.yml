@@ -1,0 +1,70 @@
+name: ExamSphere CI/CD System
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  # 1. Quality Check Job: Lints & Builds Source Code
+  quality-check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    # Frontend Checks
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        cache-dependency-path: 'client/package-lock.json'
+        
+    - name: Install Frontend Dependencies
+      working-directory: ./client
+      run: npm ci
+      
+    - name: Lint Frontend
+      working-directory: ./client
+      run: npm run lint
+      
+    - name: Build Frontend
+      working-directory: ./client
+      run: npm run build
+
+  # 2. Docker Build Job: Ensures containers build correctly
+  docker-build:
+    needs: quality-check
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+    - name: Build Backend Image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./backend
+        file: ./backend/Dockerfile
+        push: false
+        tags: examsphere-backend:latest
+        
+    - name: Build Frontend Image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./client
+        file: ./client/Dockerfile.prod
+        push: false
+        tags: examsphere-frontend:latest
+
+  # 3. (Optional) Deployment Placeholder
+  # This section can be enabled to auto-deploy to a server whenever code is pushed to main
+  # deploy:
+  #   needs: docker-build
+  #   if: github.ref == 'refs/heads/main'
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Deploy to Production
+  #       run: echo "Add your SSH deployment script or Cloud provider steps here"

@@ -12,7 +12,7 @@ const MyResults = () => {
             try {
                 const { data } = await axios.get('/student/results');
                 setResults(data);
-            } catch (error) {
+            } catch {
                 console.error('Failed to fetch results');
             } finally {
                 setLoading(false);

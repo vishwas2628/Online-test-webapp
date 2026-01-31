@@ -20,7 +20,7 @@ const TeacherTestResults = () => {
                 // Fetch results
                 const res = await axios.get(`/result/test/${testId}`);
                 setResults(res.data);
-            } catch (error) {
+            } catch {
                 console.error('Failed to fetch data');
             } finally {
                 setLoading(false);

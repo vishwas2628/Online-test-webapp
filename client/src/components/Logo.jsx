@@ -8,33 +8,20 @@ const Logo = ({ className = "w-10 h-10" }) => {
             xmlns="http://www.w3.org/2000/svg"
             className={className}
         >
-            {/* Sphere Background */}
-            <circle cx="40" cy="40" r="32" className="text-primary-600 fill-current" />
-
-            {/* Inner Ring */}
-            <circle cx="40" cy="40" r="28" stroke="white" strokeWidth="2" fill="none" opacity="0.9" />
-
-            {/* Graduation Cap - Moved Up for better spacing */}
+            <rect x="10" y="10" width="60" height="60" rx="16" className="text-ink fill-current" />
+            <path d="M18 58L62 22" className="stroke-secondary-400" strokeWidth="8" strokeLinecap="round" opacity="0.95" />
+            <circle cx="40" cy="40" r="24" className="fill-primary-600" opacity="0.92" />
             <path
-                d="M40 18L24 26L40 34L56 26L40 18Z"
+                d="M40 21L25 29L40 37L55 29L40 21Z"
                 fill="white"
             />
             <path
-                d="M31 30V36C31 39 49 39 49 36V30"
+                d="M31 33V39C31 42 49 42 49 39V33"
                 fill="white"
             />
-            {/* Tassle detail */}
-            <path d="M56 26V32" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-
-
-            {/* Checkmark - Moved Down and Centered */}
-            <path
-                d="M28 48L36 56L52 40"
-                stroke="white"
-                strokeWidth="4"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
+            <path d="M55 29V35" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+            <path d="M27 52H53" stroke="white" strokeWidth="4" strokeLinecap="round" />
+            <path d="M32 58H48" stroke="white" strokeWidth="4" strokeLinecap="round" opacity="0.85" />
         </svg>
     );
 };

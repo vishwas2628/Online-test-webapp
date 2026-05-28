@@ -113,7 +113,7 @@ const CreateTest = () => {
 
                 <form onSubmit={handleSubmit} className="space-y-8">
                     {/* Section 1: Test Details */}
-                    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8">
+                    <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 sm:p-8">
                         <div className="flex items-center mb-6 text-primary-600">
                             <FiList className="w-5 h-5 mr-2" />
                             <h2 className="text-lg font-bold uppercase tracking-wide">Test Details</h2>
@@ -226,7 +226,7 @@ const CreateTest = () => {
                         </div>
 
                         {questions.map((q, qIndex) => (
-                            <div key={qIndex} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 relative group transition-all hover:shadow-md">
+                            <div key={qIndex} className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 relative group transition-all hover:shadow-md">
                                 <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                                     <button
                                         type="button"
@@ -295,7 +295,7 @@ const CreateTest = () => {
                         <button
                             type="button"
                             onClick={addQuestion}
-                            className="w-full py-4 border-2 border-dashed border-gray-300 rounded-2xl text-gray-500 font-medium hover:border-primary-500 hover:text-primary-600 hover:bg-primary-50 transition-all flex items-center justify-center gap-2"
+                            className="w-full py-4 border-2 border-dashed border-gray-300 rounded-lg text-gray-500 font-medium hover:border-primary-500 hover:text-primary-600 hover:bg-primary-50 transition-all flex items-center justify-center gap-2"
                         >
                             <FiPlus className="w-5 h-5" />
                             Add Another Question
@@ -304,7 +304,7 @@ const CreateTest = () => {
 
                     {/* Submit Action */}
                     <div className="sticky bottom-6 z-10">
-                        <div className="bg-white/80 backdrop-blur-md border border-white/20 p-4 rounded-2xl shadow-lg flex justify-end">
+                        <div className="bg-white/80 backdrop-blur-md border border-white/20 p-4 rounded-lg shadow-lg flex justify-end">
                             <button
                                 type="button"
                                 onClick={() => navigate('/teacher')}

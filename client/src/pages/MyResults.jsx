@@ -51,7 +51,7 @@ const MyResults = () => {
                 {/* Stats Grid */}
                 {totalTests > 0 && (
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center">
+                        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex items-center">
                             <div className="p-3 bg-blue-50 text-blue-600 rounded-xl mr-4">
                                 <FiCheckCircle className="w-8 h-8" />
                             </div>
@@ -60,7 +60,7 @@ const MyResults = () => {
                                 <p className="text-2xl font-bold text-gray-900">{totalTests}</p>
                             </div>
                         </div>
-                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center">
+                        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex items-center">
                             <div className="p-3 bg-secondary-50 text-secondary-600 rounded-xl mr-4">
                                 <FiBarChart2 className="w-8 h-8" />
                             </div>
@@ -69,8 +69,8 @@ const MyResults = () => {
                                 <p className="text-2xl font-bold text-gray-900">{averageScore}%</p>
                             </div>
                         </div>
-                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center">
-                            <div className="p-3 bg-purple-50 text-purple-600 rounded-xl mr-4">
+                        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex items-center">
+                            <div className="p-3 bg-rose-50 text-rose-600 rounded-xl mr-4">
                                 <FiAward className="w-8 h-8" />
                             </div>
                             <div>
@@ -82,7 +82,7 @@ const MyResults = () => {
                 )}
 
                 {/* Results List */}
-                <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
                     {results.length === 0 ? (
                         <div className="text-center py-20 px-6">
                             <div className="mx-auto h-20 w-20 bg-gray-50 rounded-full flex items-center justify-center mb-4 text-gray-400">

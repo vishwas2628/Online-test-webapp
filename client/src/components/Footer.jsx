@@ -4,7 +4,7 @@ import Logo from './Logo';
 
 const Footer = () => {
     return (
-        <footer className="bg-gray-900 text-gray-300 py-12 border-t border-gray-800">
+        <footer className="bg-ink text-gray-300 py-12 border-t border-primary-900">
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     {/* Brand Section */}
@@ -12,11 +12,11 @@ const Footer = () => {
                         <Link to="/" className="flex items-center space-x-2 mb-4 group">
                             <Logo className="w-10 h-10 group-hover:scale-110 transition-transform duration-300" />
                             <span className="text-xl font-heading font-bold text-white tracking-tight">
-                                ExamSphere
+                                AstraQuiz
                             </span>
                         </Link>
                         <p className="text-sm leading-6 text-gray-400 mb-6">
-                            Smart & Secure Online Examination Platform. Empowering education through innovation and technology.
+                            Calm, secure assessment software for creating tests, guiding attempts, and reading results without noise.
                         </p>
                         <div className="flex space-x-4">
                             <a href="#" className="text-gray-400 hover:text-white transition">
@@ -46,10 +46,10 @@ const Footer = () => {
                     <div>
                         <h3 className="text-sm font-semibold text-white tracking-wider uppercase mb-4">Resources</h3>
                         <ul className="space-y-3">
-                            <li><a href="#" className="text-sm hover:text-primary-400 transition">Help Center</a></li>
+                            <li><a href="#" className="text-sm hover:text-primary-400 transition">Assessment Guide</a></li>
                             <li><a href="#" className="text-sm hover:text-primary-400 transition">Privacy Policy</a></li>
                             <li><a href="#" className="text-sm hover:text-primary-400 transition">Terms of Service</a></li>
-                            <li><a href="#" className="text-sm hover:text-primary-400 transition">Contact Support</a></li>
+                            <li><a href="#" className="text-sm hover:text-primary-400 transition">Support Desk</a></li>
                         </ul>
                     </div>
 
@@ -57,16 +57,16 @@ const Footer = () => {
                     <div>
                         <h3 className="text-sm font-semibold text-white tracking-wider uppercase mb-4">Project Info</h3>
                         <ul className="space-y-3">
-                            <li className="text-sm text-gray-400">Academic Project – MCA</li>
+                            <li className="text-sm text-gray-400">Academic Project - MCA</li>
                             <li className="text-sm text-gray-400">MERN Stack Application</li>
-                            <li className="text-sm text-gray-400">Developed with ❤️</li>
+                            <li className="text-sm text-gray-400">Designed for focused learning</li>
                         </ul>
                     </div>
                 </div>
 
                 <div className="mt-12 pt-8 border-t border-gray-800 text-center">
                     <p className="text-sm text-gray-500">
-                        &copy; 2026 ExamSphere. All Rights Reserved. "Empowering education through secure digital assessment."
+                        &copy; 2026 AstraQuiz. All Rights Reserved. "Clear tests, honest results, better learning."
                     </p>
                 </div>
             </div>

@@ -20,16 +20,11 @@ const Register = () => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-[calc(100vh-4rem)] bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden py-10">
-            {/* Background blobs */}
-            <div className="absolute top-0 left-0 w-96 h-96 bg-primary-300 rounded-full mix-blend-multiply filter blur-[100px] opacity-20 animate-blob"></div>
-            <div className="absolute top-0 right-0 w-96 h-96 bg-secondary-300 rounded-full mix-blend-multiply filter blur-[100px] opacity-20 animate-blob animation-delay-2000"></div>
-            <div className="absolute -bottom-32 left-20 w-96 h-96 bg-purple-300 rounded-full mix-blend-multiply filter blur-[100px] opacity-20 animate-blob animation-delay-4000"></div>
-
-            <div className="relative z-10 w-full max-w-md p-10 bg-white/90 backdrop-blur-2xl border border-white/60 shadow-2xl rounded-3xl transform transition-all duration-500 hover:shadow-3xl">
+        <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center overflow-hidden bg-canvas px-4 py-10">
+            <div className="relative z-10 w-full max-w-md rounded-lg border border-stone-200 bg-white p-8 shadow-xl sm:p-10">
                 <div className="text-center mb-10">
-                    <h1 className="text-3xl font-heading font-black tracking-tight text-gray-900 mb-3">Create Account</h1>
-                    <p className="text-gray-500">Join ExamSphere to get started.</p>
+                    <h1 className="text-3xl font-heading font-black tracking-tight text-gray-950 mb-3">Create Account</h1>
+                    <p className="text-gray-500">Join AstraQuiz and start building better assessments.</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-5">
@@ -42,7 +37,7 @@ const Register = () => {
                             <input
                                 type="text"
                                 placeholder="John Doe"
-                                className="pl-11 block w-full px-4 py-3.5 bg-gray-50/50 border border-gray-200 rounded-xl focus:bg-white focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all duration-200 ease-out"
+                                className="pl-11 block w-full px-4 py-3.5 bg-stone-50 border border-stone-200 rounded-xl focus:bg-white focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all duration-200 ease-out"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 required
@@ -59,7 +54,7 @@ const Register = () => {
                             <input
                                 type="email"
                                 placeholder="name@example.com"
-                                className="pl-11 block w-full px-4 py-3.5 bg-gray-50/50 border border-gray-200 rounded-xl focus:bg-white focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all duration-200 ease-out"
+                                className="pl-11 block w-full px-4 py-3.5 bg-stone-50 border border-stone-200 rounded-xl focus:bg-white focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all duration-200 ease-out"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
@@ -76,7 +71,7 @@ const Register = () => {
                             <input
                                 type="password"
                                 placeholder="••••••••"
-                                className="pl-11 block w-full px-4 py-3.5 bg-gray-50/50 border border-gray-200 rounded-xl focus:bg-white focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all duration-200 ease-out"
+                                className="pl-11 block w-full px-4 py-3.5 bg-stone-50 border border-stone-200 rounded-xl focus:bg-white focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all duration-200 ease-out"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
@@ -91,7 +86,7 @@ const Register = () => {
                                 <FiBriefcase className="text-gray-400 group-focus-within:text-primary-500 transition-colors" />
                             </div>
                             <select
-                                className="pl-11 block w-full px-4 py-3.5 bg-gray-50/50 border border-gray-200 rounded-xl focus:bg-white focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all duration-200 ease-out appearance-none cursor-pointer"
+                                className="pl-11 block w-full px-4 py-3.5 bg-stone-50 border border-stone-200 rounded-xl focus:bg-white focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all duration-200 ease-out appearance-none cursor-pointer"
                                 value={role}
                                 onChange={(e) => setRole(e.target.value)}
                             >
@@ -107,7 +102,7 @@ const Register = () => {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="w-full flex justify-center py-4 px-4 border border-transparent rounded-xl shadow-lg shadow-primary-600/20 text-sm font-bold text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed items-center gap-2"
+                        className="w-full flex justify-center py-4 px-4 border border-transparent rounded-xl shadow-lg shadow-primary-600/20 text-sm font-bold text-white bg-ink hover:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed items-center gap-2"
                     >
                         {loading ? 'Creating Account...' : 'Create Account'}
                     </button>

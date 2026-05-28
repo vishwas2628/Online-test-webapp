@@ -27,7 +27,7 @@ const Navbar = () => {
     // Header style classes
     const headerClasses = `fixed w-full z-50 transition-all duration-300 ${isTransparent
         ? 'bg-transparent text-white pt-6 pb-2'
-        : 'bg-white/95 backdrop-blur-md text-gray-900 shadow-lg border-b border-gray-100 py-3'
+        : 'bg-white/95 backdrop-blur-md text-gray-900 shadow-sm border-b border-stone-200 py-3'
         }`;
 
     // Link style classes
@@ -45,7 +45,7 @@ const Navbar = () => {
                         <Logo className="w-10 h-10 group-hover:scale-110 transition-transform duration-300" />
                         <span className={`text-2xl font-heading font-bold tracking-tight transition-colors duration-300 ${isTransparent ? 'text-white' : 'text-gray-900'
                             }`}>
-                            ExamSphere
+                            AstraQuiz
                         </span>
                     </Link>
 
@@ -90,8 +90,8 @@ const Navbar = () => {
                             <div className="flex items-center space-x-4">
                                 <Link to="/login" className={navLinkClasses('/login')}>Login</Link>
                                 <Link to="/register" className={`px-6 py-2.5 rounded-full font-bold shadow-lg transform hover:-translate-y-0.5 transition duration-300 ${isTransparent
-                                    ? 'bg-white text-primary-600 hover:bg-gray-100'
-                                    : 'bg-primary-600 text-white hover:bg-primary-700 hover:shadow-primary-500/30'
+                                    ? 'bg-white text-primary-700 hover:bg-gray-100'
+                                    : 'bg-ink text-white hover:bg-primary-800 hover:shadow-primary-500/30'
                                     }`}>
                                     Get Started
                                 </Link>
@@ -113,7 +113,7 @@ const Navbar = () => {
 
             {/* Mobile Menu */}
             {isOpen && (
-                <div className="md:hidden absolute top-full left-0 w-full bg-white shadow-xl border-t border-gray-100 z-40 animate-fade-in-down">
+                <div className="md:hidden absolute top-full left-0 w-full bg-white shadow-xl border-t border-stone-200 z-40 animate-fade-in-down">
                     <div className="px-4 pt-2 pb-6 space-y-2">
                         <Link to="/" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-md hover:bg-gray-50 text-gray-700 font-medium">Home</Link>
                         <Link to="/about" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-md hover:bg-gray-50 text-gray-700 font-medium">About</Link>
@@ -136,7 +136,7 @@ const Navbar = () => {
                         ) : (
                             <div className="pt-4 grid grid-cols-2 gap-4">
                                 <Link to="/login" onClick={() => setIsOpen(false)} className="block text-center px-4 py-2 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50">Login</Link>
-                                <Link to="/register" onClick={() => setIsOpen(false)} className="block text-center px-4 py-2 bg-primary-600 rounded-lg text-white font-medium hover:bg-primary-700">Register</Link>
+                                <Link to="/register" onClick={() => setIsOpen(false)} className="block text-center px-4 py-2 bg-ink rounded-lg text-white font-medium hover:bg-primary-800">Register</Link>
                             </div>
                         )}
                     </div>

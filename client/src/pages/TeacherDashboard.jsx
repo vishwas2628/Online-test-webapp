@@ -64,7 +64,7 @@ const TeacherDashboard = () => {
                 </div>
 
                 {tests.length === 0 ? (
-                    <div className="text-center py-24 bg-white rounded-3xl border border-gray-100 shadow-sm">
+                    <div className="text-center py-24 bg-white rounded-lg border border-gray-100 shadow-sm">
                         <div className="mx-auto h-24 w-24 text-primary-200 bg-primary-50 rounded-full flex items-center justify-center mb-6">
                             <FiBook className="text-4xl" />
                         </div>
@@ -80,7 +80,7 @@ const TeacherDashboard = () => {
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {tests.map(test => (
-                            <div key={test._id} className="group bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:border-primary-100 transition-all duration-300 flex flex-col overflow-hidden">
+                            <div key={test._id} className="group bg-white rounded-lg shadow-sm border border-gray-100 hover:shadow-xl hover:border-primary-100 transition-all duration-300 flex flex-col overflow-hidden">
                                 <div className="p-6 flex-1">
                                     <div className="flex justify-between items-start mb-4">
                                         <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${test.status === 'active' ? 'bg-green-100 text-green-700' :

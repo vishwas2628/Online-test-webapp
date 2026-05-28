@@ -37,7 +37,7 @@ const TestAnalytics = () => {
     if (!test || !test.questions) {
         return (
             <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-                <div className="text-center p-8 bg-white rounded-2xl shadow-sm border border-red-100 max-w-md">
+                <div className="text-center p-8 bg-white rounded-lg shadow-sm border border-red-100 max-w-md">
                     <div className="w-16 h-16 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
                         <FiXCircle className="text-3xl" />
                     </div>
@@ -92,7 +92,7 @@ const TestAnalytics = () => {
                 </div>
 
                 {/* Score Summary Card */}
-                <div className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden mb-10">
+                <div className="bg-white rounded-lg shadow-lg border border-gray-100 overflow-hidden mb-10">
                     <div className="bg-primary-600 p-8 text-white relative overflow-hidden">
                         <div className="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-white opacity-10 rounded-full blur-3xl"></div>
                         <div className="relative z-10 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
@@ -107,15 +107,15 @@ const TestAnalytics = () => {
 
                             <div className="mt-6 md:mt-0 flex gap-6">
                                 <div className="text-center">
-                                    <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center text-3xl font-bold mb-2">{correctCount}</div>
+                                    <div className="w-16 h-16 rounded-lg bg-white/20 flex items-center justify-center text-3xl font-bold mb-2">{correctCount}</div>
                                     <p className="text-sm text-primary-100">Correct</p>
                                 </div>
                                 <div className="text-center">
-                                    <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center text-3xl font-bold mb-2">{wrongCount}</div>
+                                    <div className="w-16 h-16 rounded-lg bg-white/20 flex items-center justify-center text-3xl font-bold mb-2">{wrongCount}</div>
                                     <p className="text-sm text-primary-100">Wrong</p>
                                 </div>
                                 <div className="text-center">
-                                    <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center text-3xl font-bold mb-2">{skippedCount}</div>
+                                    <div className="w-16 h-16 rounded-lg bg-white/20 flex items-center justify-center text-3xl font-bold mb-2">{skippedCount}</div>
                                     <p className="text-sm text-primary-100">Skipped</p>
                                 </div>
                             </div>
@@ -147,7 +147,7 @@ const TestAnalytics = () => {
 
                 <div className="space-y-6">
                     {questionAnalysis.map((q, index) => (
-                        <div key={index} className={`bg-white rounded-2xl p-6 border-l-4 shadow-sm transition-all hover:shadow-md ${q.status === 'correct' ? 'border-green-500' :
+                        <div key={index} className={`bg-white rounded-lg p-6 border-l-4 shadow-sm transition-all hover:shadow-md ${q.status === 'correct' ? 'border-green-500' :
                             q.status === 'wrong' ? 'border-red-500' : 'border-gray-300'
                             }`}>
                             <div className="flex justify-between items-start mb-4">

@@ -148,7 +148,7 @@ const TakeTest = () => {
                     {test.questions.map((q, index) => (
                         <div
                             key={q._id}
-                            className={`bg-white rounded-2xl p-6 md:p-8 shadow-sm border transition-all duration-300 ${answers[q._id]
+                            className={`bg-white rounded-lg p-6 md:p-8 shadow-sm border transition-all duration-300 ${answers[q._id]
                                 ? 'border-primary-200 shadow-md ring-1 ring-primary-50'
                                 : 'border-gray-100'
                                 }`}
@@ -198,7 +198,7 @@ const TakeTest = () => {
                     ))}
                 </div>
 
-                <div className="mt-12 flex items-center justify-between bg-white p-6 rounded-2xl shadow-lg border border-gray-100 sticky bottom-6 z-20">
+                <div className="mt-12 flex items-center justify-between bg-white p-6 rounded-lg shadow-lg border border-gray-100 sticky bottom-6 z-20">
                     <div className="flex items-center space-x-2 text-gray-600">
                         <FiAlertTriangle className="text-orange-500" />
                         <span className="text-sm">Please review before submitting.</span>

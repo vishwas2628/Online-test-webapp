@@ -71,7 +71,7 @@ const StudentDashboard = () => {
 
                 {/* Content */}
                 {tests.length === 0 ? (
-                    <div className="text-center py-20 bg-white rounded-3xl shadow-sm border border-gray-100">
+                    <div className="text-center py-20 bg-white rounded-lg shadow-sm border border-gray-100">
                         <div className="mx-auto h-24 w-24 text-primary-200 bg-primary-50 rounded-full flex items-center justify-center mb-6">
                             <FiBook className="text-4xl" />
                         </div>
@@ -86,7 +86,7 @@ const StudentDashboard = () => {
                             const isCompleted = completedTestIds.has(test._id);
 
                             return (
-                                <div key={test._id} className="group relative bg-white rounded-2xl shadow-sm border border-gray-100/80 hover:shadow-xl hover:border-primary-100 transition-all duration-300 flex flex-col h-full overflow-hidden">
+                                <div key={test._id} className="group relative bg-white rounded-lg shadow-sm border border-gray-100/80 hover:shadow-xl hover:border-primary-100 transition-all duration-300 flex flex-col h-full overflow-hidden">
                                     {/* Status Badge */}
                                     <div className="absolute top-4 right-4 max-w-fit z-10">
                                         <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm
@@ -148,7 +148,7 @@ const StudentDashboard = () => {
                                         ) : isActive ? (
                                             <Link
                                                 to={`/student/take-test/${test._id}`}
-                                                className="flex items-center justify-center w-full px-4 py-3.5 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl font-bold hover:shadow-lg hover:shadow-primary-500/30 transition-all duration-300 transform group-hover:-translate-y-1"
+                                                className="flex items-center justify-center w-full px-4 py-3.5 bg-primary-700 text-white rounded-xl font-bold hover:shadow-lg hover:shadow-primary-500/30 transition-all duration-300 transform group-hover:-translate-y-1"
                                             >
                                                 Start Examination
                                                 <FiPlay className="ml-2" />

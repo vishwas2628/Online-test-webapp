@@ -35,7 +35,7 @@ const MainLayout = () => {
   return (
     <>
       <Navbar />
-      <div className={`min-h-screen bg-gray-50 text-gray-900 font-sans ${isLanding ? '' : 'pt-16'}`}>
+      <div className={`min-h-screen page-surface text-gray-900 font-sans ${isLanding ? '' : 'pt-16'}`}>
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<Landing />} />

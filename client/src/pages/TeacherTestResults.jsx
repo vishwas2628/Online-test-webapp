@@ -114,7 +114,7 @@ const TeacherTestResults = () => {
 
                 {/* Stats Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center">
+                    <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex items-center">
                         <div className="p-3 bg-blue-50 text-blue-600 rounded-xl mr-4">
                             <FiUsers className="w-8 h-8" />
                         </div>
@@ -123,7 +123,7 @@ const TeacherTestResults = () => {
                             <p className="text-2xl font-bold text-gray-900">{totalAttempts}</p>
                         </div>
                     </div>
-                    <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center">
+                    <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex items-center">
                         <div className="p-3 bg-green-50 text-green-600 rounded-xl mr-4">
                             <FiBarChart2 className="w-8 h-8" />
                         </div>
@@ -132,8 +132,8 @@ const TeacherTestResults = () => {
                             <p className="text-2xl font-bold text-gray-900">{averageScore}%</p>
                         </div>
                     </div>
-                    <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center">
-                        <div className="p-3 bg-purple-50 text-purple-600 rounded-xl mr-4">
+                    <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex items-center">
+                        <div className="p-3 bg-rose-50 text-rose-600 rounded-xl mr-4">
                             <FiBarChart2 className="w-8 h-8" />
                         </div>
                         <div>
@@ -144,7 +144,7 @@ const TeacherTestResults = () => {
                 </div>
 
                 {/* Results Table */}
-                <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
                     <div className="p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
                         <h2 className="font-bold text-gray-700">Student Submissions</h2>
                         <div className="relative">

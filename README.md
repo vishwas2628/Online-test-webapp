@@ -8,7 +8,28 @@ To run the application locally for development, you will run the frontend and ba
 
 ### Prerequisites
 *   Node.js (v18 or higher)
-*   MongoDB (or use the Atlas connection string in `.env`)
+*   Docker for local MongoDB
+
+### 0. Local MongoDB Setup
+Start MongoDB locally with Docker:
+```bash
+docker compose up -d mongodb
+```
+
+The backend is configured to use:
+```properties
+MONGO_URI=mongodb://admin:password@localhost:27017/online-test-app?authSource=admin
+```
+
+To stop MongoDB:
+```bash
+docker compose stop mongodb
+```
+
+To fully reset the local database:
+```bash
+docker compose down -v
+```
 
 ### 1. Backend Setup
 1.  Navigate to the backend directory:

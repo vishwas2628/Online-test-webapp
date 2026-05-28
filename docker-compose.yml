@@ -1,6 +1,19 @@
-version: '3.8'
-
 services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: online-test-app
+    volumes:
+      - mongodb-data:/data/db
+    networks:
+      - mern-network
+
   backend:
     build: ./backend
     container_name: online-test-backend
@@ -10,6 +23,9 @@ services:
       - ./backend/.env
     environment:
       - PORT=5000
+      - MONGO_URI=mongodb://admin:password@mongodb:27017/online-test-app?authSource=admin
+    depends_on:
+      - mongodb
     networks:
       - mern-network
 
@@ -24,7 +40,7 @@ services:
       - ./client:/app
       - /app/node_modules
     environment:
-      - VITE_API_URL=${VITE_API_URL}
+      - VITE_API_URL=${VITE_API_URL:-http://localhost:5000/api}
     depends_on:
       - backend
     networks:
@@ -33,3 +49,6 @@ services:
 networks:
   mern-network:
     driver: bridge
+
+volumes:
+  mongodb-data:

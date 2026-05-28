@@ -12,8 +12,9 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(express.json());
 app.use(cors({
-    origin: ['http://localhost:5173', 'http://127.0.0.1:5173', 'https://frontend-qqtw.onrender.com'],
-    credentials: true
+    origin: ['http://localhost:5173', 'http://127.0.0.1:5173', 'https://frontend-qqtw.onrender.com', 'http://localhost:5000'],
+    credentials: true,
+    exposedHeaders: ['Content-Disposition']
 }));
 app.use(cookieParser());
 

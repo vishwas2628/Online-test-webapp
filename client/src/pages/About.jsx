@@ -49,7 +49,7 @@ const About = () => {
                                 <p className="font-semibold text-lg text-primary-600">Developed By</p>
                                 <ul className="mt-2 space-y-1 text-gray-700">
                                     <li className="flex items-center"><FiCheckCircle className="text-green-500 mr-2" /> Vishwas Chourasiya</li>
-                                    <li className="flex items-center"><FiCheckCircle className="text-green-500 mr-2" /> Arun Kumar Pandey</li>
+                                    <li className="flex items-center"><FiCheckCircle className="text-green-500 mr-2" /> Satyam Kumar</li>
                                     <li className="flex items-center"><FiCheckCircle className="text-green-500 mr-2" /> Satyam Pyasi</li>
                                 </ul>
                             </div>

@@ -14,6 +14,37 @@ const TakeTest = () => {
     const [submitting, setSubmitting] = useState(false);
     const timerRef = useRef();
 
+    // Debug log to confirm new code is running
+    console.log('TakeTest component initialized v2');
+
+    const submitTest = useCallback(async (autoSubmit = false) => {
+        if (!autoSubmit && !window.confirm('Are you sure you want to finish and submit your exam?')) {
+            return;
+        }
+
+        clearInterval(timerRef.current);
+        setSubmitting(true);
+
+        const formattedAnswers = Object.keys(answers).map(qId => ({
+            questionId: qId,
+            answer: answers[qId]
+        }));
+
+        const toastId = toast.loading('Submitting your answers...');
+
+        try {
+            await axios.post(`/student/submit/${testId}`, {
+                answers: formattedAnswers
+            });
+            toast.success('Examination Submitted Successfully!', { id: toastId });
+            navigate('/student/results');
+        } catch (error) {
+            console.error(error);
+            toast.error('Submission failed. Please try again.', { id: toastId });
+            setSubmitting(false);
+        }
+    }, [answers, testId, navigate]);
+
     useEffect(() => {
         const fetchTest = async () => {
             try {
@@ -51,33 +82,7 @@ const TakeTest = () => {
         setAnswers({ ...answers, [questionId]: option });
     };
 
-    const submitTest = useCallback(async (autoSubmit = false) => {
-        if (!autoSubmit && !window.confirm('Are you sure you want to finish and submit your exam?')) {
-            return;
-        }
 
-        clearInterval(timerRef.current);
-        setSubmitting(true);
-
-        const formattedAnswers = Object.keys(answers).map(qId => ({
-            questionId: qId,
-            answer: answers[qId]
-        }));
-
-        const toastId = toast.loading('Submitting your answers...');
-
-        try {
-            await axios.post(`/student/submit/${testId}`, {
-                answers: formattedAnswers
-            });
-            toast.success('Examination Submitted Successfully!', { id: toastId });
-            navigate('/student/results');
-        } catch (error) {
-            console.error(error);
-            toast.error('Submission failed. Please try again.', { id: toastId });
-            setSubmitting(false);
-        }
-    }, [answers, testId, navigate]);
 
     const formatTime = (seconds) => {
         const h = Math.floor(seconds / 3600);

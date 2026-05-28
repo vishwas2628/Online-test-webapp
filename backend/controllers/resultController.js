@@ -1,4 +1,6 @@
 const TestAttempt = require('../models/testAttempt.model');
+const Test = require('../models/test.model');
+const puppeteer = require('puppeteer');
 
 // @desc    Teacher view of all student results for a test
 // @route   GET /api/result/test/:testId
@@ -29,9 +31,6 @@ const getStudentDetailResult = async (req, res) => {
     }
 };
 
-const puppeteer = require('puppeteer');
-const Test = require('../models/test.model');
-
 // @desc    Export test results to PDF
 // @route   GET /api/result/export/:testId
 const exportToPDF = async (req, res) => {
@@ -48,10 +47,14 @@ const exportToPDF = async (req, res) => {
         const averageScore = totalStudents > 0
             ? (results.reduce((acc, curr) => acc + curr.score, 0) / totalStudents).toFixed(2)
             : 0;
+        // Check if there are any results before calculating highest score to avoid -Infinity
         const highestScore = totalStudents > 0
             ? Math.max(...results.map(r => r.score))
             : 0;
-        const passedCount = results.filter(r => (r.score / test.questions.reduce((a, b) => a + b.points, 0)) >= 0.4).length; // Assuming 40% pass
+
+        // Safe check for total points to avoid division by zero
+        const totalTestPoints = test.questions.reduce((a, b) => a + b.points, 0) || 1;
+        const passedCount = results.filter(r => (r.score / totalTestPoints) >= 0.4).length; // Assuming 40% pass
         const passPercentage = totalStudents > 0 ? ((passedCount / totalStudents) * 100).toFixed(1) : 0;
 
         const htmlContent = `
@@ -144,9 +147,13 @@ const exportToPDF = async (req, res) => {
         `;
 
         const browser = await puppeteer.launch({
-            headless: 'new',
-            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
-            args: ['--no-sandbox', '--disable-setuid-sandbox']
+            headless: 'new', // Using 'new' which is standard in v22+
+            args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage', // Addresses shared memory issues in some environments
+                '--disable-gpu' // Addresses GPU crashes
+            ]
         });
         const page = await browser.newPage();
         await page.setContent(htmlContent, { waitUntil: 'networkidle0' });

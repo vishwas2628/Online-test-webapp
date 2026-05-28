@@ -53,12 +53,17 @@ const TeacherTestResults = () => {
 
             // Extract filename from header or assume default
             const contentDisposition = response.headers['content-disposition'];
+            console.log('Content-Disposition:', contentDisposition);
+
             let fileName = 'report.pdf';
             if (contentDisposition) {
-                const fileNameMatch = contentDisposition.match(/filename="(.+)"/);
-                if (fileNameMatch.length === 2)
+                // Try to match filename="name.pdf" or filename=name.pdf
+                const fileNameMatch = contentDisposition.match(/filename=["']?([^;"']+)["']?/);
+                if (fileNameMatch && fileNameMatch[1]) {
                     fileName = fileNameMatch[1];
+                }
             }
+            console.log('Downloading file as:', fileName);
 
             link.setAttribute('download', fileName);
             document.body.appendChild(link);
